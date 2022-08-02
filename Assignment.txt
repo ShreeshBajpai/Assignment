@@ -1,0 +1,105 @@
+/*Lets create a eccomerce tables with SOC by creating 4 tables 
+products
+customer
+order
+accounts
+and create 4-5 views so business owner can see different different results*/
+
+
+create database ecommerce
+use ecommerce
+
+create table products (pid int primary key, pname nvarchar(30), pprice int)
+
+insert into products values (1,'Watch', 1000)
+insert into products values (2,'Shirt', 2000)
+insert into products values (3,'Trouser', 3000)
+insert into products values (4,'Shoe', 4000)
+insert into products values (5,'Facewash', 500)
+insert into products values (6,'Shampoo', 6000)
+insert into products values (7,'Sleepers', 7000)
+insert into products values (8,'Socks', 800)
+insert into products values (9,'Coat', 9000)
+insert into products values (10,'Bag', 10000)
+
+select * from products
+
+create table customer (cid int primary key, cname nvarchar(30), cphone int, caddress nvarchar(20))
+
+insert into customer values (1,'Abhishek', 12345, 'Dehradun')
+insert into customer values (2,'Vineet', 54321, 'Champawat')
+insert into customer values (3,'Pawan', 23456, 'Rishikesh')
+insert into customer values (4,'Sarthak', 45273, 'Mussoorie')
+insert into customer values (5,'Anu', 36274, 'Haridwar')
+insert into customer values (6,'Saumya', 34352, 'Shivpuri')
+insert into customer values (7,'Nishiket', 46355, 'Premnagar')
+insert into customer values (8,'Arpit', 563823, 'Sinola')
+insert into customer values (9,'Vikas', 56374, 'Malsi')
+insert into customer values (10,'Hemant', 10473, 'Chopta')
+
+select * from customer
+
+create table orders (oid int primary key, oname nvarchar(30), oprice int)
+
+insert into orders values (1,'Watch', 153)
+insert into orders values (2,'Shoe', 1362)
+insert into orders values (3,'Bag', 1345)
+insert into orders values (4,'Glass', 1434)
+insert into orders values (5,'Goggles', 1342)
+insert into orders values (6,'Frooti', 154)
+insert into orders values (7,'Chips', 1006)
+insert into orders values (8,'Socks', 1004)
+insert into orders values (9,'Sourpunk', 1600)
+insert into orders values (10,'Shirt', 5100)
+
+select * from orders
+
+create table accounts (aid int primary key, balance numeric(10,0))
+
+insert into accounts values (1,5716)
+insert into accounts values (2,2526)
+insert into accounts values (3,2436)
+insert into accounts values (4,256)
+insert into accounts values (5,716)
+insert into accounts values (6,616)
+insert into accounts values (7,4516)
+insert into accounts values (8,316)
+insert into accounts values (9,4716)
+insert into accounts values (10,216)
+
+select * from accounts
+
+create view view1
+as select pname, pprice, balance
+from products as p
+inner join accounts as a
+on p.pid=a.aid
+
+select * from view1
+
+
+create view view2
+as select cname, oname, caddress
+from customer as c
+inner join orders as o
+on c.cid=o.oid
+
+select * from view2
+
+
+create view view3
+as select cname, balance, caddress
+from customer as c
+inner join accounts as a
+on c.cid=a.aid
+
+select * from view3
+
+
+create view view4
+as select pprice, oname, oprice
+from products as p
+inner join orders as o
+on p.pid=o.oid
+
+select * from view4
