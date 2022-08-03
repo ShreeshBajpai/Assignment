@@ -1,0 +1,57 @@
+--Perform all kind of queries
+
+select * from customer where cname ='Pawan'
+select * from customer where cname <> 'Pawan'
+select * from customer where cname !='Pawan'
+
+select * from orders
+union
+select * from products
+
+select cname from customer
+union
+select pname from products
+
+select cid, cname from customer
+union
+select pid, pname from products
+
+select cid, cname from customer 
+union
+select pid, pname from products where pprice>1000
+
+insert into products values (11, 'Abhishek', 2600)
+
+select cname from customer
+intersect
+select pname from products
+
+select * from customer where cname in ('Abhishek','Pawan','Anu','Vikas','Arpit')
+select * from customer where cname = 'Pawan' or cname='Abhishek' or cname='Anu'
+select * from products where pprice not in (1000,2000,3000,4000)
+select * from products where pprice not between 1000 and 4000
+
+insert into products values (12, 'Vikas', null)
+
+select * from products where pprice is null
+select * from products where pprice is not null
+delete from products where pprice is null
+
+select * from customer where cname like 'Ab%ek'
+insert into customer values (11, 'Viswas', 917362, 'Raiwala')
+insert into customer values (12, 'Vikas', 453674, 'Raipur')
+insert into customer values (13, 'Vibhas', 4562647, 'Mussoorie')
+insert into customer values (14, 'Vais', 76833, 'Dehradun')
+
+select * from customer where cname like 'V%s'
+select * from customer where cname like '%swa%'
+select * from customer where cname like 'Vik[ae]s'
+select * from customer where cname like '[as]%'
+
+insert into orders values (11, 'Vais', 2000)
+insert into orders values (12, 'Vaishnavi', 3000)
+
+select * from orders where exists (select * from products where orders.oprice=products.pprice)
+select * from products where exists (select * from orders where orders.oprice=products.pprice)
+select * from orders where exists (select * from products)
+select * from products where exists (select * from orders)
